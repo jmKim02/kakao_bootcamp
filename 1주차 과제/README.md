@@ -4,7 +4,7 @@
 1. 사용자가 콘솔에 명령어 입력 → Cashier가 주문 처리
 2. HeadChef가 주문 확인 → 어떤 요리인지 판단
 3. 업무 분배:
-- 어려운 요리(햄버거): HeadChef가 직접 조리
+- 복잡한 요리(햄버거): HeadChef가 직접 조리
 - 쉬운 요리(사이드 음식): AssistantChef에게 지시
 4. 조리 완료 → 콘솔에 완료 메시지 출력
 <br/>
@@ -17,7 +17,7 @@
 - HeadChef: OrderQueue를 지속적으로 확인 (별도 스레드)
 - 새 주문 발견 → Order를 큐에서 가져옴 → 요리 복잡도 판단
 3. 업무 분배 결정
-- 어려운 요리 (Burger, Pizza):
+- 복잡한 요리 (Burger, Pizza):
   - HeadChef → 직접 조리 → 본인이 처리
 - 쉬운 요리 (Fries, Salad):
   - HeadChef → AssistantChef에게 지시 → AssistantChef의 개별 큐에 Order 전달
@@ -35,3 +35,17 @@
 - COMPLETED
 
 ![class_diagram](https://github.com/user-attachments/assets/9282195c-96d1-4413-ae44-583175aaa61d)
+
+
+### 메뉴아이템 보완 클래스 다이어그램(Employee쪽은 위와 동일합니다.)
+### 변경된 프로세스: Strategy 패턴 적용
+- 이전: HeadChef가 직접 메뉴 이름을 보고 각 메뉴에 맞는 복잡도 판단하는 형태
+- 이후: MenuItem이 자신의 속성을 바탕으로 적절한 조리 전략 결정한 후 반환
+
+### 주요 차이점:
+- HeadChef의 판단 로직이 각 MenuItem의 전략 객체로 이동
+- 각 메뉴가 자신이 누구한테 조리되어야 하는지 스스로 알고 있는 구조
+- 복잡한 요리(Burger, Pizza): HeadChef 직접 조리
+- 쉬운 요리(Fries, Salad): AssistantChef 위임 조리
+
+![20250910_182608](https://github.com/user-attachments/assets/3d3384c3-7ed1-48cc-b9c9-6fbd83690d43)
