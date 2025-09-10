@@ -24,7 +24,14 @@
 4. 조리 완료
 - HeadChef: 주문들을 순차적으로 조리
 - AssistantChef: 할당받은 주문들을 별도로 조리 (동시 진행 가능)
+- 각각 완료 시 콘솔에 "조리 완성" 메시지 출력
 5. 상태 확인
 - 사용자: "status" 입력 시 → OrderQueue 대기 상황, 각 셰프 작업 현황, 완료된 주문 목록 출력
+<br/>
+
+### OrderStatus(Enum) - 각 조리 중 상태 구분은 ENUM으로
+- ORDERED
+- COOKING
+- COMPLETED
 
 ![class_diagram](https://github.com/user-attachments/assets/9282195c-96d1-4413-ae44-583175aaa61d)
