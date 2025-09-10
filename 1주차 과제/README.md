@@ -18,13 +18,12 @@
 - 새 주문 발견 → Order를 큐에서 가져옴 → 요리 복잡도 판단
 3. 업무 분배 결정
 - 복잡한 요리 (Burger, Pizza):
-  - HeadChef → "직접 조리하겠다" 출력 → 본인이 처리
+  - HeadChef → 직접 조리 → 본인이 처리
 - 간단한 요리 (Fries, Salad):
-  - HeadChef → "AssistantChef에게 지시" 출력 → AssistantChef의 개별 큐에 Order 전달
+  - HeadChef → AssistantChef에게 지시 → AssistantChef의 개별 큐에 Order 전달
 4. 조리 완료
 - HeadChef: 주문들을 순차적으로 조리
 - AssistantChef: 할당받은 주문들을 별도로 조리 (동시 진행 가능)
-- 각각 완료 시 콘솔에 "조리 완성" 메시지 출력
 5. 상태 확인
 - 사용자: "status" 입력 시 → OrderQueue 대기 상황, 각 셰프 작업 현황, 완료된 주문 목록 출력
 
