@@ -17,9 +17,9 @@
 - HeadChef: OrderQueue를 지속적으로 확인 (별도 스레드)
 - 새 주문 발견 → Order를 큐에서 가져옴 → 요리 복잡도 판단
 3. 업무 분배 결정
-- 복잡한 요리 (Burger, Pizza):
+- 어려운 요리 (Burger, Pizza):
   - HeadChef → 직접 조리 → 본인이 처리
-- 간단한 요리 (Fries, Salad):
+- 쉬운 요리 (Fries, Salad):
   - HeadChef → AssistantChef에게 지시 → AssistantChef의 개별 큐에 Order 전달
 4. 조리 완료
 - HeadChef: 주문들을 순차적으로 조리
