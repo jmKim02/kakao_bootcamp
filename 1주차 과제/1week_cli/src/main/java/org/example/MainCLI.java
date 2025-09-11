@@ -57,10 +57,10 @@ public class MainCLI {
                 restaurantService.getCashier().takeOrder(selectedItem);
                 waitingForMenuSelection = false;
             } else {
-                System.out.println("[Cashier-Thread] 잘못된 메뉴 번호입니다. 1-4 사이로 입력해주세요.");
+                System.out.println("[" + Thread.currentThread().getName() + "] 잘못된 메뉴 번호입니다. 1-4 사이로 입력해주세요.");
             }
         } catch (NumberFormatException e) {
-            System.out.println("[Cashier-Thread] 숫자를 입력해주세요.");
+            System.out.println("[" + Thread.currentThread().getName() + "] 숫자를 입력해주세요.");
         }
     }
 
@@ -88,7 +88,7 @@ public class MainCLI {
 
     private static void showMenu() {
         System.out.println();
-        System.out.println("[Cashier-Thread] 메뉴를 보여드리겠습니다");
+        System.out.println("[" + Thread.currentThread().getName() + "] 메뉴를 보여드리겠습니다");
         System.out.println("=================== 메뉴 ===================");
 
         for (MenuItem item : restaurantService.getMenu()) {
@@ -96,7 +96,7 @@ public class MainCLI {
         }
 
         System.out.println("==========================================");
-        System.out.println("[Cashier-Thread] 주문하실 번호를 입력해주세요 (1-4):");
+        System.out.println("[" + Thread.currentThread().getName() + "] 주문하실 번호를 입력해주세요 (1-4):");
         waitingForMenuSelection = true;
     }
 

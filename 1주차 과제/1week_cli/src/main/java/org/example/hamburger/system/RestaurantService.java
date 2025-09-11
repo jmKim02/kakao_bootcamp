@@ -74,11 +74,12 @@ public class RestaurantService {
         // 스레드 생성 시 명시적 이름 지정
         headChefThread = new Thread(headChef, "HeadChef-Thread");
         assistantChefThread = new Thread(assistantChef, "AssistantChef-Thread");
-        cashierThread = new Thread(cashier, "Cashier-Thread");
+        // cli에서 해보니 결국 입력을 main쓰레드에서 받기에 work() : 무언가 캐셔만의 의미있는 백그라운드 작업 로직이 있을 때 다시 실행해야.
+//        cashierThread = new Thread(cashier, "Cashier-Thread");
 
         headChefThread.start();
         assistantChefThread.start();
-        cashierThread.start();
+//        cashierThread.start();
 
         System.out.println("[시스템] 시스템 준비 완료!");
         System.out.println("명령어: order, status, help, quit");
@@ -165,6 +166,6 @@ public class RestaurantService {
         cashier.stop();
         if (headChefThread != null) headChefThread.interrupt();
         if (assistantChefThread != null) assistantChefThread.interrupt();
-        if (cashierThread != null) cashierThread.interrupt();
+//        if (cashierThread != null) cashierThread.interrupt();
     }
 }
