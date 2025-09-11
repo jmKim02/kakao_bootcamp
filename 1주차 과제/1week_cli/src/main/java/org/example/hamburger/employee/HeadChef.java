@@ -15,7 +15,7 @@ import org.example.hamburger.system.RestaurantService;
  * 3. 업무 분배 결정 (본인 vs AssistantChef)
  * 4. 복잡한 요리 직접 조리
  */
-public class HeadChef extends Chef{
+public class HeadChef extends Chef implements Runnable, Workable{
 
     private AssistantChef assistant;
 
@@ -28,20 +28,10 @@ public class HeadChef extends Chef{
         this.assistant = assistantChef;
     }
 
-    @Override
-    protected String getChefType() {
-        return "HeadChef";
-    }
-
-    // cashier나 assistantChef와 같은 이유.. 우선 제외
-    // 우선은 그냥 간단한 텍스트로 대체.
+    // cashier와 같은 이유로 단순화
     @Override
     public void work() {
-        System.out.println("[" + Thread.currentThread().getName() + "] " + name + " 근무 시작");
-        System.out.println("[" + Thread.currentThread().getName() + "] 주방 장비 점검 중...");
-        System.out.println("[" + Thread.currentThread().getName() + "] 오늘의 재료 상태 확인 완료");
-        System.out.println("[" + Thread.currentThread().getName() + "] 메뉴별 조리 순서 계획 수립");
-        System.out.println("[" + Thread.currentThread().getName() + "] 주방 준비 완료!");
+        System.out.println("[" + Thread.currentThread().getName() + "] 주방장 준비: 장비 점검, 재료 확인, 업무 계획 수립 완료");
     }
 
     /**
@@ -55,6 +45,8 @@ public class HeadChef extends Chef{
      */
     @Override
     public void run() {
+        work();
+
         while (working) { // Employee의 volatile boolean working 사용
             try {
 

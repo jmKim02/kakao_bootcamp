@@ -35,9 +35,12 @@ public class MainCLI {
                 continue;
             }
 
+
             if (waitingForMenuSelection) {
+                // 메뉴 입력 선택 대기 : 1~4 메뉴 번호
                 processMenuSelection(input);
             } else {
+                // 일반 명령어 대기: order, status, 이런거.
                 processCommand(input);
             }
 
@@ -72,6 +75,9 @@ public class MainCLI {
             case "status":
                 restaurantService.showStatus();
                 break;
+            case "receipt":
+                restaurantService.getCashier().requestSalesReport();
+                break;
             case "help":
                 showHelp();
                 break;
@@ -104,6 +110,7 @@ public class MainCLI {
         System.out.println("사용 가능한 명령어:");
         System.out.println("  order  - 음식 주문하기");
         System.out.println("  status - 현재 상태 확인");
+        System.out.println("  receipt - 매출 확인");
         System.out.println("  help   - 도움말 보기");
         System.out.println("  quit   - 프로그램 종료");
         System.out.println();

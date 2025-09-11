@@ -11,7 +11,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * 보조 요리사 클래스 - HeadChef로부터 간단한 요리를 할당받아 조리하는 역할
  * Chef를 상속받아 요리 기능을 가지며, HeadChef와 별도의 큐로 독립적으로 작업
  */
-public class AssistantChef extends Chef{
+public class AssistantChef extends Chef implements Runnable, Workable{
 
     /**
      * AssistantChef 전용 주문 큐
@@ -30,18 +30,10 @@ public class AssistantChef extends Chef{
         this.assignedOrders = new LinkedBlockingQueue<>();
     }
 
-    @Override
-    protected String getChefType() {
-        return "AssistantChef";
-    }
-
-    // Cashier와 같은 이유. 우선은 그냥 간단한 텍스트로 대체.
+    // cashier와 같은 이유로 단순화
     @Override
     public void work() {
-        System.out.println("[" + Thread.currentThread().getName() + "] " + name + " 근무 시작");
-        System.out.println("[" + Thread.currentThread().getName() + "] 조리 도구 준비 중...");
-        System.out.println("[" + Thread.currentThread().getName() + "] 간단한 요리 재료 정리 완료");
-        System.out.println("[" + Thread.currentThread().getName() + "] 보조 업무 준비 완료!");
+        System.out.println("[" + Thread.currentThread().getName() + "] 보조 요리사 준비: 조리 도구 정리, 재료 준비 완료");
     }
 
     /**
@@ -54,6 +46,8 @@ public class AssistantChef extends Chef{
      */
     @Override
     public void run() {
+        work();
+
         while (working) { // Employee의 volatile boolean working 사용
             try {
 
@@ -62,7 +56,6 @@ public class AssistantChef extends Chef{
                 Order order = assignedOrders.take();
 
                 synchronized (System.out) {
-                    System.out.println();
                     System.out.println("[" + Thread.currentThread().getName() + "] HeadChef로부터 주문 #" + order.getOrderId() +
                             " (" + order.getMenuItem().getName() + ") 지시받음, 조리 시작");
                 }

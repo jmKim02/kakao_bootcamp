@@ -10,7 +10,7 @@ import java.util.List;
  * 모든 요리사(HeadChef, AssistantChef)의 공통 기능을 정의하는 추상 클래스
  * Employee를 상속받아 요리사만의 특별한 기능들을 추가
  */
-public abstract class Chef extends Employee{
+public class Chef extends Employee{
 
     // 하위 클래스(요리사들)에서 직접 접근 필요해서 protected
     protected RestaurantService restaurantService;
@@ -66,6 +66,4 @@ public abstract class Chef extends Employee{
             busy = false;
         }
     }
-
-    protected abstract String getChefType();
 }

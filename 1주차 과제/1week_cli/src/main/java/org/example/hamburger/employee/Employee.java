@@ -8,7 +8,7 @@ package org.example.hamburger.employee;
  * - 햄버거 가게의 모든 직원(HeadChef, AssistantChef, Cashier)은 동시에 일해야 한다.
  * - 각자 다른 업루를 하지만 공통된 속성(이름, ID, 작업상태)과 생명주기 관리가 필요하다.
  */
-public abstract class Employee implements Runnable{
+public class Employee{
 
     // 여기서 name과 id는 식별 및 출력을 하기 위한 용도로 필요했다.
     protected String name;
@@ -26,9 +26,6 @@ public abstract class Employee implements Runnable{
         this.name = name;
         this.id = id;
     }
-
-    // 각 직원의 업무가 다르기 때문에 추상 메서드로 정의
-    public abstract void work();
 
     // 작업 안전하게 종료하는 메서드: 위에서 volatile 쓴 이유와 연관
     public void stop() {

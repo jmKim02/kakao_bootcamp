@@ -64,25 +64,17 @@ public class RestaurantService {
         System.out.println("=== 햄버거 주문 시뮬레이션 ===");
         System.out.println("[시스템] 햄버거 주문 시뮬레이션 시작.");
 
-        // 각 직원의 준비 작업 수행 - 아직 의미 있는 기능 구현은 못해보고 단순 텍스트라 길이만 길어져서 잠시 주석처리.
-//        System.out.println("\n[시스템] 직원들 근무 준비 중...");
-//        headChef.work();
-//        assistantChef.work();
-//        cashier.work();
-//        System.out.println("[시스템] 모든 직원 준비 완료!\n");
-
         // 스레드 생성 시 명시적 이름 지정
         headChefThread = new Thread(headChef, "HeadChef-Thread");
         assistantChefThread = new Thread(assistantChef, "AssistantChef-Thread");
-        // cli에서 해보니 결국 입력을 main쓰레드에서 받기에 work() : 무언가 캐셔만의 의미있는 백그라운드 작업 로직이 있을 때 다시 실행해야.
-//        cashierThread = new Thread(cashier, "Cashier-Thread");
+        cashierThread = new Thread(cashier, "Cashier-Thread");
 
         headChefThread.start();
         assistantChefThread.start();
-//        cashierThread.start();
+        cashierThread.start();
 
         System.out.println("[시스템] 시스템 준비 완료!");
-        System.out.println("명령어: order, status, help, quit");
+        System.out.println("명령어: order, status, receipt, help, quit");
     }
 
     /**
@@ -110,21 +102,13 @@ public class RestaurantService {
             });
         }
 
-        if (!completedOrders.isEmpty()) {
-            System.out.println("--- 완성된 주문 ---");
-            int totalSales = 0;
-            for (Order order : completedOrders) {
-                System.out.println("  " + order.toString() + " ✓");
-                totalSales += order.getMenuItem().getPrice();
-            }
-            System.out.println("총 매출: " + String.format("%,d", totalSales) + "원");
-        }
         System.out.println("=======================================");
         System.out.println();
     }
 
     public void addOrder(Order order) {
         orderQueue.offer(order);
+        cashier.recordSale(order);
     }
 
     /**
@@ -166,6 +150,6 @@ public class RestaurantService {
         cashier.stop();
         if (headChefThread != null) headChefThread.interrupt();
         if (assistantChefThread != null) assistantChefThread.interrupt();
-//        if (cashierThread != null) cashierThread.interrupt();
+        if (cashierThread != null) cashierThread.interrupt();
     }
 }
