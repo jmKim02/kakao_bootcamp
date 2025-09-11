@@ -61,7 +61,7 @@ public class Cashier extends Employee implements Runnable, Workable{
     private void showSalesReport() {
         synchronized (System.out) {
             System.out.println();
-            System.out.println("=== 매출 전표 ===");
+            System.out.println("[" + Thread.currentThread().getName() + "] " + "=== 매출 전표 ===");
 
             if (salesHistory.isEmpty()) {
                 System.out.println("완성된 주문이 없습니다.");
